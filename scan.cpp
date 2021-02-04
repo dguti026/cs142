@@ -7,6 +7,26 @@
 #include "scan.h"
 using namespace std;
 
+int th = 1;
+
+int reduce(int* A, int n) {
+        //Coarsening
+        if (n <= th) {
+                int ret = 0;
+                for (int i = 0; i < n; i++) {
+                        ret += A[i];
+                }
+                return ret;
+        }
+
+        int L, R;
+        L = cilk_spawn reduce(A, n/2);
+        R = reduce(A+n/2, n-n/2);
+        cilk_sync;
+        return L+R;
+}
+
+
 int main(int argc, char** argv) {
 	if (argc != 2) {
 		cout << "Usage: ./scan [num_elements]" << endl;

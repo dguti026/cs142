@@ -49,13 +49,12 @@ int main(int argc, char** argv) {
 	t0.stop();
 	cout << ans << ". sequential running time = " << t0.get_total() << endl;
 	
-	/*
+	//parallel adding an array
 	timer t; t.start();
 	int x = reduce(A, n);
 	t.stop();
 	cout << "time: " << t.get_total() << endl;
 	cout << x << endl;
-	*/
 
   delete []A;
 	
